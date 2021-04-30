@@ -2,7 +2,7 @@
 
 *1. Start by using the 01-Ins_Mern/create-react-express example as a base for your application.*
 
-2. Add code to connect to a MongoDB database named googlebooks using the mongoose npm package.
+*2. Add code to connect to a MongoDB database named googlebooks using the mongoose npm package.
 
 // require mongoose
 const mongoose = require('mongoose');
@@ -14,7 +14,7 @@ mongoose.connect(
   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 
-3. Using mongoose, then create a Book schema.
+*3. Using mongoose, then create a Book schema.
 
 // require mongoose
 const mongoose = require('mongoose');
@@ -46,7 +46,7 @@ const Book = mongoose.model('Book', bookSchema);
 // Export the model
 module.exports = Book;
 
-4. At a minimum, books should have each of the following fields:
+*4. At a minimum, books should have each of the following fields:
 
 title - Title of the book from the Google Books API
 
@@ -70,6 +70,22 @@ Creating documents in your books collection similar to the following:
 
 5. Create a layout similar to the mockups displayed above. This should be a SPA (Single Page Application) that uses react-router-dom to navigate, hide and show your React components without changing the route within Express.
 The layout should include at least two React Components for each page Search and Saved.
+
+Header Component
+
+import React, { Component } from 'react';
+
+class Header extends Component {
+    render() {
+        return (
+            <header>
+                <h1>Google Books</h1>
+            </header>
+        )
+    }
+}
+
+export default Header;
 
 Feel free to try out alternative CSS framework to Bootstrap.
 
