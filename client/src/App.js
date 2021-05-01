@@ -4,10 +4,14 @@ import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Search from "./components/Search";
+import Saved from "./components/Saved";
+import SaveBtn from "./components/SaveBtn";
+import { List, ListItem } from "./components/List/List";
 import Submit from "./components/Submit";
 import { Input, TextArea, FormBtn } from "./components/Form";
 import API from "./utils/API";
 import { BookList, BookListItem } from "./components/BookList";
+import { Link } from "react-router-dom";
 
 function App() {
   const [books, setBook] = useState([]);
@@ -68,74 +72,98 @@ function App() {
 
   return (
     <div>
-      <Header />
+      <div className="container">
+        <Header />
+      </div>
+
       <Router>
         <Nav />
         <Route exact path={["/", "/search"]}>
-          <Home />
-          <Search
-            name="BookSearch"
-            value={bookSearch}
-            onChange={handleInputChange}
-          />
-          <Submit
-            onClick={handleFormSubmit}
-            type="success"
-            className="input-lg"
-          >
-            Submit
-          </Submit>
-          <BookList>
-            {books.map((book) => {
-              return (
-                <BookListItem
-                  key={book.title}
-                  title={book.title}
-                  description={book.description}
-                  authors={book.authors}
-                  image={book.image}
-                  link={book.link}
-                />
-              );
-            })}
-          </BookList>
-          <form>
-            <Input
-              onChange={handlePostInputChange}
-              name="title"
-              placeholder="Title (required)"
+          <div className="container">
+            <Home />
+            <Search
+              name="BookSearch"
+              value={bookSearch}
+              onChange={handleInputChange}
             />
-            <Input
-              onChange={handlePostInputChange}
-              name="author"
-              placeholder="Author (required)"
-            />
-            <Input
-              onChange={handlePostInputChange}
-              name="link"
-              placeholder="Enter google books link"
-            />
-            <Input
-              onChange={handlePostInputChange}
-              name="image"
-              placeholder="Enter a google books image src"
-            />
-            <TextArea
-              onChange={handlePostInputChange}
-              name="description"
-              placeholder="Description (Optional)"
-            />
-            <FormBtn
-              disabled={!(formObject.author && formObject.title)}
-              onClick={handlePostFormSubmit}
-            >
-              Submit Book
-            </FormBtn>
-          </form>
+            <br></br>
+            <div className="text-center">
+              <Submit
+                onClick={handleFormSubmit}
+                type="success"
+                className="input-lg"
+              >
+                Submit
+              </Submit>
+            </div>
+            <br></br>
+          </div>
+          <div className="container">
+            <BookList>
+              {books.map((book) => {
+                return (
+                  <BookListItem
+                    // id={book._id}
+                    key={book.title}
+                    title={book.title}
+                    description={book.description}
+                    authors={book.authors}
+                    image={book.image}
+                    link={book.link}
+                  />
+                );
+              })}
+            </BookList>
+            <form>
+              <Input
+                onChange={handlePostInputChange}
+                name="title"
+                placeholder="Title (required)"
+              />
+              <Input
+                onChange={handlePostInputChange}
+                name="author"
+                placeholder="Author (required)"
+              />
+              <Input
+                onChange={handlePostInputChange}
+                name="link"
+                placeholder="Enter google books link"
+              />
+              <Input
+                onChange={handlePostInputChange}
+                name="image"
+                placeholder="Enter a google books image src"
+              />
+              <TextArea
+                onChange={handlePostInputChange}
+                name="description"
+                placeholder="Description (Optional)"
+              />
+              <FormBtn
+                disabled={!(formObject.author && formObject.title)}
+                onClick={handlePostFormSubmit}
+              >
+                Submit Book
+              </FormBtn>
+            </form>
+          </div>
         </Route>
-        {/* <Route exact path="/saved">
-      <Saved />
-    </Route> */}
+        <Route exact path="/saved">
+          <Saved>
+            <List>
+              {books.map((book) => (
+                <ListItem key={book._id}>
+                  <Link to={"/books/" + book._id}>
+                    <strong>
+                      {book.title} by {book.author}
+                    </strong>
+                  </Link>
+                </ListItem>
+              ))}
+            </List>
+          </Saved>
+        </Route>
       </Router>
     </div>
   );
