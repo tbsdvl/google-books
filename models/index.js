@@ -1,4 +1,4 @@
 // Export the book model
 module.exports = {
-    Recipe: require("./book")
+    Book: require("./book")
   };
