@@ -1,5 +1,6 @@
 import React from "react";
 import Thumbnail from "../Thumbnail";
+
 // import { Container, Row, Col } from "../Grid";
 
 // Exporting both BookList and BookItem from this file
@@ -10,12 +11,11 @@ export function BookList({ children }) {
 }
 
 // RecipeListItem renders a bootstrap list item containing data from the recipe api call
-export function BookListItem({ image, title, authors, description }) {
+export function BookListItem({ image, title, authors, description, id }) {
   return (
     <li className="list-group-item">
       <figure>
         <Thumbnail image={image || "https://placehold.it/300x300"} />
-        <figcaption>Book Image</figcaption>
       </figure>
       <h3>{title}</h3>
       <p>Authors: {authors}</p>
