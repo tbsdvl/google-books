@@ -8,7 +8,7 @@ have a title and author(s) to submit in the form.
 
 # Preview
 
-![Image]()
+![Image](./googlebooks.png)
 
 # Link to Application
 
