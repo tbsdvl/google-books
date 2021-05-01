@@ -12,9 +12,13 @@ export function BookList({ children }) {
 
 // RecipeListItem renders a bootstrap list item containing data from the recipe api call
 export function BookListItem({ image, title, authors, description, id }) {
+  const style = {
+    width: '30%'
+  };
+
   return (
     <li className="list-group-item">
-      <figure>
+      <figure style={style}>
         <Thumbnail image={image || "https://placehold.it/300x300"} />
       </figure>
       <h3>{title}</h3>
