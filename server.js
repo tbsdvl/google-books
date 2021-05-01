@@ -15,10 +15,12 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Connect to mongodb with mongoose
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/googlebooks",
-  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks", {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 
 // Define API routes here
 app.use("/api", apiRoutes);
