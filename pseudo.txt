@@ -99,3 +99,47 @@ Feel free to try out alternative CSS framework to Bootstrap.
 (get) - Will load your single HTML page in client/build/index.html. Make sure you have this after all other routes are defined.
 
 Deploy your application to Heroku once complete. You must use Create React App and current versions of React and React-Router-Dom for this assignment.
+
+===================================================
+TO THE CENTRAL GRADER
+===================================================
+
+I was unable to finish this application. 
+
+While get and post methods do work, I still struggle to 
+Setup a post method to send data to the "Saved" component
+and delete data from the database. My problem is appending
+a "SaveBtn" component to the BookListItem component.
+I understand why the SaveBtn isn't collecting props and using the
+book _id as an argument because it exists outside the BookListItem component.
+
+If I were to send the data to a different component, I could try and 
+jury-rig my way through with some jsx style vanilla javascript collecting
+element data values and pushing them over to the Saved component 
+using an onClick attribute with a function. While it is an odd approach,
+I still think it would work by appending new elements containing data
+from BookListItem cards like the title, authors, description, etc.
+
+My greatest mistake was most likely not using a controller to handle
+the functionality given a get, post, put, delete request. I etup
+my apiRoutes to contain both the routing and functions, which hindered
+my progress multiple times. I've been able to resolve some issues and
+find workarounds by observing component functions from previous activities 
+that affect props, state, handlers, etc. and use the API.js file to call functions
+for data collection/insertion given a particular route. 
+
+MongoDB Atlas is not connecting again, I experienced this issue with my Fitness Tracker Application.
+I am unsure as to why heroku does not connect to the database, I follow the directions
+but it has to be something on my end with the way the databases are setup in my cluster.
+Maybe heroku does not realize my 'googlebooks' database or something is wrong with my password.
+A quick note, I'd like an updated instructional video for connecting Heroku to MongoDB Atlas for future
+classes as the instructor's example uses mLab, a discontinued add-on in heroku's resources.
+The tutorial covers the basics, but visual support to understand the EXACT process will only be
+beneficial to students like me and future students.
+
+These are the current problems with my application. I will continue to see what I can do with the 
+delete/put/post methods. I am grateful in advance if you could give feedback about my current issues.
+
+Thank you for reading my pseudocode and notes on my issues.
+
+- Triston
