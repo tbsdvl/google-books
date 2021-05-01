@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Search from "./components/Search";
 import Submit from "./components/Submit";
-import { Input, TextArea, FormBtn } from './components/Form'; 
+import { Input, TextArea, FormBtn } from "./components/Form";
 import API from "./utils/API";
 import { BookList, BookListItem } from "./components/BookList";
-
 
 function App() {
   const [books, setBook] = useState([]);
   const [bookSearch, setBookSearch] = useState("");
-  const [formObject, setFormObject] = useState({})
+  const [formObject, setFormObject] = useState({});
 
   // Loads all books and sets them to books
   function loadBooks() {
     API.getBook()
-      .then(res => 
-        setBook(res.data)
-      )
-      .catch(err => console.log(err));
-  };
+      .then((res) => setBook(res.data))
+      .catch((err) => console.log(err));
+  }
 
   // // Deletes a book from the database with a given id, then reloads books from the db
   // function deleteBook(id) {
@@ -34,8 +31,8 @@ function App() {
   // Handles updating component state when the user types into the input field
   function handlePostInputChange(event) {
     const { name, value } = event.target;
-    setFormObject({...formObject, [name]: value})
-  };
+    setFormObject({ ...formObject, [name]: value });
+  }
 
   // When the form is submitted, use the API.saveBook method to save the book data
   // Then reload books from the database
@@ -45,12 +42,14 @@ function App() {
       API.saveBook({
         title: formObject.title,
         author: formObject.author,
-        description: formObject.description
+        description: formObject.description,
+        link: formObject.link,
+        image: formObject.image,
       })
-        .then(res => loadBooks())
-        .catch(err => console.log(err));
+        .then((res) => loadBooks())
+        .catch((err) => console.log(err));
     }
-  };
+  }
 
   const handleInputChange = (event) => {
     // Destructure the name and value properties off of event.target
@@ -83,46 +82,58 @@ function App() {
             onClick={handleFormSubmit}
             type="success"
             className="input-lg"
-          >Submit</Submit>
+          >
+            Submit
+          </Submit>
           <BookList>
-                {books.map(book => {
-                  return (
-                    <BookListItem
-                      key={book.title}
-                      title={book.title}
-                      description={book.description}
-                      authors={book.authors}
-                      image={book.image}
-                      link={book.link}
-                    />
-                  );
-                })}
-              </BookList>
-              <form>
-              <Input
-                onChange={handlePostInputChange}
-                name="title"
-                placeholder="Title (required)"
-              />
-              <Input
-                onChange={handlePostInputChange}
-                name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
-                onChange={handlePostInputChange}
-                name="description"
-                placeholder="Description (Optional)"
-              />
-              <FormBtn
-                disabled={!(formObject.author && formObject.title)}
-                onClick={handlePostFormSubmit}
-              >
-                Submit Book
-              </FormBtn>
-            </form>
+            {books.map((book) => {
+              return (
+                <BookListItem
+                  key={book.title}
+                  title={book.title}
+                  description={book.description}
+                  authors={book.authors}
+                  image={book.image}
+                  link={book.link}
+                />
+              );
+            })}
+          </BookList>
+          <form>
+            <Input
+              onChange={handlePostInputChange}
+              name="title"
+              placeholder="Title (required)"
+            />
+            <Input
+              onChange={handlePostInputChange}
+              name="author"
+              placeholder="Author (required)"
+            />
+            <Input
+              onChange={handlePostInputChange}
+              name="link"
+              placeholder="Enter google books link"
+            />
+            <Input
+              onChange={handlePostInputChange}
+              name="image"
+              placeholder="Enter a google books image src"
+            />
+            <TextArea
+              onChange={handlePostInputChange}
+              name="description"
+              placeholder="Description (Optional)"
+            />
+            <FormBtn
+              disabled={!(formObject.author && formObject.title)}
+              onClick={handlePostFormSubmit}
+            >
+              Submit Book
+            </FormBtn>
+          </form>
         </Route>
-    {/* <Route exact path="/saved">
+        {/* <Route exact path="/saved">
       <Saved />
     </Route> */}
       </Router>
